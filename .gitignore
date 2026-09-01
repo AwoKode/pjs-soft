@@ -1,0 +1,10 @@
+node_modules/
+out/
+dist/
+*.log
+.DS_Store
+tsconfig.node.tsbuildinfo
+tsconfig.web.tsbuildinfo
+
+# Dokumenty robocze / oferty klientów — nie trafiają do repozytorium
+*.pdf

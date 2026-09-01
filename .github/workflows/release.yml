@@ -1,0 +1,33 @@
+name: Release
+
+# Publikacja wydania uruchamia się tagiem wersji, np. `git tag v1.0.1 && git push --tags`.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  # Potrzebne, aby electron-builder mógł utworzyć wydanie i wgrać pliki.
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Jedyny automatyczny test w projekcie — błąd typów ma zatrzymać wydanie,
+      # zanim trafi ono do użytkowników.
+      - run: npm run typecheck
+
+      - run: npm run build:publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,31 @@
+appId: pl.pjssoft.offers
+productName: PJS Soft
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+  # Bez numeru wersji w nazwie, dzięki czemu link
+  # /releases/latest/download/PJS-Soft-Setup.exe jest stały.
+  artifactName: PJS-Soft-Setup.${ext}
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: PJS Soft
+portable:
+  # Wersja portable nie aktualizuje się sama, więc wersja zostaje w nazwie pliku.
+  artifactName: PJS-Soft-${version}-win-${arch}-portable.${ext}
+publish:
+  provider: github
+  owner: AwoKode
+  repo: pjs-soft
