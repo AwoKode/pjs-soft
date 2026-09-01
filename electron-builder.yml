@@ -29,3 +29,6 @@ publish:
   provider: github
   owner: AwoKode
   repo: pjs-soft
+  # Domyślnie electron-builder tworzy wydanie jako szkic (draft), którego nie
+  # widać publicznie i którego nie znajdzie mechanizm aktualizacji.
+  releaseType: release
